@@ -1,0 +1,4 @@
+pandas==2.3.3
+pandas-gbq==0.35.2
+dbfread==2.0.7
+pyreaddbc==2.0.4

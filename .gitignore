@@ -1,0 +1,12 @@
+# Ambiente virtual: cada pessoa recria o seu
+.venv/
+
+# Dados baixados: o script recria a partir do DATASUS
+dados/
+
+# Arquivos gerados pelo Python
+__pycache__/
+*.pyc
+
+# Credenciais e configurações locais
+.env
