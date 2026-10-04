@@ -10,3 +10,15 @@ __pycache__/
 
 # Credenciais e configurações locais
 .env
+.env.*
+*.pem
+*.key
+*service-account*.json
+*credentials*.json
+application_default_credentials.json
+
+# Cobertura
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
