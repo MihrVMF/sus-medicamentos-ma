@@ -53,7 +53,7 @@ Testes, na mesma venv, com as dependências de `requirements-dev.txt`:
 
 ## CI
 
-O workflow `.github/workflows/ci.yml` roda no GitHub Actions, em runner `ubuntu-latest`, a cada push e pull request. Os três jobs rodam em paralelo. Nenhum deles baixa o DATASUS nem grava no BigQuery.
+O workflow `.github/workflows/ci.yml` roda no GitHub Actions, em runner `ubuntu-24.04`, a cada push e pull request. Os três jobs rodam em paralelo. Nenhum deles baixa o DATASUS nem grava no BigQuery.
 
 | Job | O que faz | Falha quando |
 | --- | --- | --- |
