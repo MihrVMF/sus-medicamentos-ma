@@ -22,3 +22,5 @@ application_default_credentials.json
 .coverage.*
 htmlcov/
 coverage.xml
+
+dashboard/mensal.json

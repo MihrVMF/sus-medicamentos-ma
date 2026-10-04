@@ -12,9 +12,9 @@ O trabalho novo fica na branch `lucas`. `main` é a linha do repositório origin
 
 ## Arquitetura
 
-DATASUS (FTP, arquivos .dbc) → Python → BigQuery (`raw`) → analytics → Power BI
+DATASUS (FTP, arquivos .dbc) → Python → BigQuery (`raw`) → views em `analytics` → `dashboard/index.html`
 
-O script `pipeline/extrair_carregar.py` faz três stages. Analytics e Power BI ainda não estão no repositório.
+O script `pipeline/extrair_carregar.py` faz os três stages da carga. As views estão em `analytics/views.sql`. O dashboard é a página `dashboard/index.html`.
 
 | Stage | O que faz |
 | --- | --- |
@@ -50,6 +50,19 @@ Testes, na mesma venv, com as dependências de `requirements-dev.txt`:
 
     pip install -r requirements-dev.txt
     pytest
+
+
+## Analytics e dashboard
+
+As views ficam em `analytics/views.sql` e leem `raw.apac_medicamentos`:
+
+| View | Grão |
+| --- | --- |
+| `analytics.apac_mensal` | competência (`AP_CMP`): quantidade de APACs, municípios do paciente e valor |
+| `analytics.apac_medicamento` | competência e procedimento principal (`AP_PRIPAL`), o código do medicamento na SIGTAP |
+| `analytics.apac_municipio` | competência e município do paciente (`AP_MUNPCN`) |
+
+O dashboard não traz número embutido. `analytics/exportar_dashboard.py` grava `dashboard/mensal.json` a partir da view mensal, e `dashboard/index.html` mostra essa tabela. Os dois dependem da credencial local do BigQuery. `mensal.json` não entra no git.
 
 ## CI
 

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>CEAF Maranhão</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2rem; color: #1a1a1a; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border-bottom: 1px solid #ddd; text-align: left; padding: 0.4rem; }
+    .aviso { background: #f6f6f6; padding: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Dispensação CEAF, Maranhão</h1>
+  <p>Lê <code>dashboard/mensal.json</code>, gerado por <code>analytics/exportar_dashboard.py</code> a partir da view <code>analytics.apac_mensal</code>. Sem esse arquivo, a página não inventa número.</p>
+  <div id="estado" class="aviso">Nenhum dado carregado.</div>
+  <table id="tabela" hidden>
+    <thead><tr><th>Competência</th><th>APACs</th><th>Municípios</th><th>Valor</th></tr></thead>
+    <tbody></tbody>
+  </table>
+  <script>
+    fetch("mensal.json")
+      .then((r) => { if (!r.ok) throw new Error("sem arquivo"); return r.json(); })
+      .then((linhas) => {
+        const corpo = document.querySelector("#tabela tbody");
+        linhas.forEach((linha) => {
+          const tr = document.createElement("tr");
+          [linha.competencia, linha.apacs, linha.municipios_paciente, linha.valor_total]
+            .forEach((valor) => {
+              const td = document.createElement("td");
+              td.textContent = valor ?? "";
+              tr.appendChild(td);
+            });
+          corpo.appendChild(tr);
+        });
+        document.querySelector("#estado").hidden = true;
+        document.querySelector("#tabela").hidden = false;
+      })
+      .catch(() => {
+        document.querySelector("#estado").textContent =
+          "Sem mensal.json. Rode analytics/exportar_dashboard.py com a credencial do BigQuery.";
+      });
+  </script>
+</body>
+</html>
