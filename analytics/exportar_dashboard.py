@@ -1,12 +1,12 @@
 """Exporta analytics.apac_mensal para dashboard/mensal.json.
 
-Usa a credencial local do Google Cloud. Não grava segredo.
+Usa a credencial local do Google Cloud, via pandas-gbq. Não grava segredo.
 """
 
 import json
 from pathlib import Path
 
-from google.cloud import bigquery
+import pandas_gbq
 
 CONSULTA = """
 SELECT competencia, apacs, municipios_paciente, valor_total
@@ -16,10 +16,10 @@ ORDER BY competencia
 
 
 def main():
-    cliente = bigquery.Client(project="sus-medicamentos-ma")
-    linhas = [dict(linha) for linha in cliente.query(CONSULTA).result()]
+    df = pandas_gbq.read_gbq(CONSULTA, project_id="sus-medicamentos-ma")
     destino = Path(__file__).resolve().parents[1] / "dashboard" / "mensal.json"
-    destino.write_text(json.dumps(linhas, ensure_ascii=False, default=str, indent=2))
+    linhas = json.loads(df.to_json(orient="records"))
+    destino.write_text(json.dumps(linhas, ensure_ascii=False, indent=2))
     print(f"{len(linhas)} competências em {destino}")
 
 
