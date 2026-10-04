@@ -1,5 +1,10 @@
 # SUS Medicamentos MA
 
+[![CI](https://github.com/MihrVMF/sus-medicamentos-ma/actions/workflows/ci.yml/badge.svg?branch=lucas)](https://github.com/MihrVMF/sus-medicamentos-ma/actions/workflows/ci.yml)
+[![coverage](https://img.shields.io/badge/coverage-96%25-2ea44f)](https://github.com/MihrVMF/sus-medicamentos-ma/blob/lucas/pyproject.toml)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/downloads/release/python-3120/)
+[![MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
 Pipeline de dados públicos do SUS: dispensação de medicamentos do Componente
 Especializado da Assistência Farmacêutica (CEAF) no Maranhão, de 2022 a 2026.
 
