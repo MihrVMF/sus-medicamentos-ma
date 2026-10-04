@@ -27,5 +27,3 @@ DATASUS (FTP, arquivos .dbc) → Python → BigQuery (raw → analytics) → Pow
 - Toda análise temporal usa a competência de atendimento (`AP_CMP`), não o
   mês do arquivo
 - Queda real de 18% a 38% no número de APACs entre junho e agosto de 2023
-
-- TEST
