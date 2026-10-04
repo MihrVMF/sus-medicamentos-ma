@@ -17,3 +17,9 @@ def test_dashboard_nao_inventa_numero():
     html = (RAIZ / "dashboard" / "index.html").read_text()
     assert "mensal.json" in html
     assert "1.350.154" not in html
+
+def test_publish_so_na_branch_lucas():
+    workflow = (RAIZ / ".github" / "workflows" / "publish.yml").read_text()
+    assert "branches: [lucas]" in workflow
+    assert "path: dashboard" in workflow
+    assert "deploy-pages" in workflow

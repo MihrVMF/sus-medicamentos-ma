@@ -64,6 +64,8 @@ As views ficam em `analytics/views.sql` e leem `raw.apac_medicamentos`:
 
 O dashboard não traz número embutido. `analytics/exportar_dashboard.py` grava `dashboard/mensal.json` a partir da view mensal, e `dashboard/index.html` mostra essa tabela. Os dois dependem da credencial local do BigQuery. `mensal.json` não entra no git.
 
+O dashboard publicado fica em [GitHub Pages](https://mihrvmf.github.io/sus-medicamentos-ma/). O workflow `publish` sobe só a pasta `dashboard/` a cada push na branch `lucas` que mexe nela. A primeira vez exige Pages ligado no repositório, com fonte em GitHub Actions.
+
 ## CI
 
 O workflow `.github/workflows/ci.yml` roda no GitHub Actions, em runner `ubuntu-24.04`, a cada push e pull request. Os três jobs rodam em paralelo. Nenhum deles baixa o DATASUS nem grava no BigQuery.
