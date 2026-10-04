@@ -50,6 +50,15 @@ def baixar_todos(nomes):
     disponiveis = set(ftp.nlst())
 
     baixados = []
+    try:
+        baixados.extend(_baixar_lista(ftp, disponiveis, nomes))
+    finally:
+        ftp.quit()
+    return baixados
+
+
+def _baixar_lista(ftp, disponiveis, nomes):
+    baixados = []
     for nome in nomes:
         destino = PASTA / nome
         if nome not in disponiveis:
@@ -57,13 +66,15 @@ def baixar_todos(nomes):
             continue
         if not destino.exists():
             temporario = destino.with_name(destino.name + ".part")
-            with open(temporario, "wb") as f:
-                ftp.retrbinary(f"RETR {nome}", f.write)
-            temporario.replace(destino)
+            try:
+                with open(temporario, "wb") as f:
+                    ftp.retrbinary(f"RETR {nome}", f.write)
+                temporario.replace(destino)
+            except Exception:
+                temporario.unlink(missing_ok=True)
+                raise
             print(f"Baixado: {nome}")
         baixados.append(destino)
-
-    ftp.quit()
     return baixados
 
 
